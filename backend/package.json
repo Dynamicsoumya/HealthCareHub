@@ -1,4 +1,8 @@
 {
+
+  "engines": {
+    "node":"24.12.0"
+  },
   "name": "ambula-backend",
   "version": "1.0.0",
   "main": "server.js",
