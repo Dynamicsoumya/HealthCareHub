@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 
@@ -14,7 +14,7 @@ export default function Profile() {
     e.preventDefault();
     setSaving(true);
     try {
-      const { data } = await axios.put('/api/auth/profile', form);
+      const { data } = await api.put('/auth/profile', form);
       updateUser(data);
       toast.success('Profile updated!');
     } catch (err) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { format, addDays } from 'date-fns';
 import { useAuth } from '../context/AuthContext';
@@ -32,7 +32,7 @@ export default function BookAppointment() {
     setWeekDates(dates);
     setSelectedDate(dates[0].date);
 
-    axios.get(`/api/doctors/${doctorId}/slots`)
+    api.get(`/doctors/${doctorId}/slots`)
       .then(res => setData(res.data))
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -44,7 +44,7 @@ export default function BookAppointment() {
 
     setBooking(true);
     try {
-      const { data: appt } = await axios.post('/api/appointments', {
+      const { data: appt } = await api.post('/appointments', {
         doctorId,
         date: selectedDate,
         slotTime: selectedSlot,
@@ -57,7 +57,7 @@ export default function BookAppointment() {
       if (err.response?.data?.code === 'SLOT_TAKEN') {
         toast.error('⚠️ This slot was just booked! Refreshing available slots...');
         // Refresh slots
-        const res = await axios.get(`/api/doctors/${doctorId}/slots`);
+        const res = await api.get(`/doctors/${doctorId}/slots`);
         setData(res.data);
         setSelectedSlot('');
         setStep(1);

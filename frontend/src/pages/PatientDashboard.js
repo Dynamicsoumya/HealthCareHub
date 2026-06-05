@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { format } from 'date-fns';
 import { useAuth } from '../context/AuthContext';
 
@@ -13,7 +13,7 @@ export default function PatientDashboard() {
   const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    axios.get('/api/appointments/my')
+    api.get('/appointments/my')
       .then(res => setAppointments(res.data))
       .catch(console.error)
       .finally(() => setLoading(false));

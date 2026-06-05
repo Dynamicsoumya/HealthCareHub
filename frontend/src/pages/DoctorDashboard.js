@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
 import { useAuth } from '../context/AuthContext';
+import api from '../api/axios';
 
 export default function DoctorDashboard() {
   const { user } = useAuth();
@@ -21,7 +22,7 @@ export default function DoctorDashboard() {
   const fetchAppointments = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get('/api/appointments/doctor/all', { params: { date: selectedDate } });
+      const { data } = await api.get('/appointments/doctor/all', { params: { date: selectedDate } });
       setAppointments(data);
     } catch (err) {
       console.error(err);
@@ -39,7 +40,7 @@ export default function DoctorDashboard() {
   const saveNotes = async (status) => {
     setSaving(true);
     try {
-      await axios.put(`/api/appointments/${selectedAppt._id}/notes`, { notes, prescription, status });
+      await api.put(`/appointments/${selectedAppt._id}/notes`, { notes, prescription, status });
       toast.success('Notes saved successfully');
       fetchAppointments();
       setSelectedAppt(null);

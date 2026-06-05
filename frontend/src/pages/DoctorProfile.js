@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { format, addDays } from 'date-fns';
 
 export default function DoctorProfile() {
@@ -18,7 +18,7 @@ export default function DoctorProfile() {
     setWeekDates(dates);
     setSelectedDate(dates[0].date);
 
-    axios.get(`/api/doctors/${id}/slots`)
+    api.get(`/doctors/${id}/slots`)
       .then(res => setData(res.data))
       .catch(console.error)
       .finally(() => setLoading(false));

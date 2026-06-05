@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 
 const DoctorCard = ({ doctor }) => (
   <div className="card" style={{ transition: 'all 0.2s' }}
@@ -63,7 +63,7 @@ export default function DoctorSearch() {
       if (search) params.search = search;
       if (specialization) params.specialization = specialization;
       if (location) params.location = location;
-      const { data } = await axios.get('/api/doctors', { params });
+      const { data } = await api.get('/doctors', { params });
       setDoctors(data);
       setDisplayCount(6); // Reset to 6 when searching
     } catch (err) {

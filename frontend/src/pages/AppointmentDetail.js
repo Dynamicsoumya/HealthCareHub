@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
 import { useAuth } from '../context/AuthContext';
@@ -16,7 +16,7 @@ export default function AppointmentDetail() {
   const [cancelling, setCancelling] = useState(false);
 
   useEffect(() => {
-    axios.get(`/api/appointments/${id}`)
+    api.get(`/appointments/${id}`)
       .then(res => setAppt(res.data))
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -26,7 +26,7 @@ export default function AppointmentDetail() {
     if (!window.confirm('Cancel this appointment?')) return;
     setCancelling(true);
     try {
-      await axios.put(`/api/appointments/${id}/cancel`);
+      await api.put(`/appointments/${id}/cancel`);
       toast.success('Appointment cancelled');
       navigate(user.role === 'doctor' ? '/doctor/dashboard' : '/patient/dashboard');
     } catch (err) {
