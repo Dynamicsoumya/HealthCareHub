@@ -57,6 +57,11 @@ export default function DoctorDashboard() {
     completed: appointments.filter(a => a.status === 'completed').length,
     cancelled: appointments.filter(a => a.status === 'cancelled').length,
   };
+  const safeFormatDate = (dateStr) => {
+  const date = new Date(dateStr);
+  if (!dateStr || isNaN(date.getTime())) return '';
+  return format(date, 'dd MMM');
+};
 
   return (
     <div>
@@ -92,7 +97,10 @@ export default function DoctorDashboard() {
             style={{ padding: '8px 14px', borderRadius: 8, border: '1.5px solid #e2e8f0', fontFamily: 'DM Sans', fontSize: '0.95rem' }} />
           <button className="btn btn-outline btn-sm" onClick={() => setSelectedDate(new Date().toISOString().split('T')[0])}>Today</button>
           <span style={{ color: '#64748b', fontSize: '0.9rem' }}>
-            {selectedDate === new Date().toISOString().split('T')[0] ? "Today's" : format(new Date(selectedDate + 'T00:00:00'), 'dd MMM')} appointments
+          {selectedDate === new Date().toISOString().split('T')[0]
+  ? "Today's"
+  : `${safeFormatDate(selectedDate)} appointments`
+}
           </span>
         </div>
 

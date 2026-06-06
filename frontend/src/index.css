@@ -172,10 +172,11 @@ a { text-decoration: none; color: inherit; }
   }
 
   /* Buttons full width on mobile */
-  .btn {
-    width: 100%;
-    justify-content: center;
+@media (max-width: 768px) {
+  .doctor-grid .btn {
+    width: auto;
   }
+}
 
   /* Card spacing tighter */
   .card {
@@ -575,10 +576,10 @@ select {
     width: 100%;
   }
 
-  /* Better spacing for flexbox items */
+  /* Better spacing for flexbox items
   [style*="display: flex"] {
     flex-wrap: wrap;
-  }
+  } */
 }
 
 /* Improve card hover effects on touch devices */
@@ -627,5 +628,26 @@ select {
   button:focus {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-grid .card {
+    display: block !important;
+    width: 100% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    overflow: visible !important;
+    min-height: 200px;
+  }
+}
+.doctor-grid {
+  display: grid !important;
+}
+
+@media (max-width: 768px) {
+  .doctor-grid {
+    display: block !important;
   }
 }
