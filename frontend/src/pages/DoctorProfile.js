@@ -117,7 +117,14 @@ export default function DoctorProfile() {
             {doctor.about && (
               <div className="card" style={{ marginBottom: 24 }}>
                 <h3 style={{ fontFamily: "Syne", marginBottom: 12 }}>About</h3>
-                <p style={{ color: "#475569", lineHeight: 1.7 }}>
+                <p
+                  style={{
+                    color: "#475569",
+                    lineHeight: 1.7,
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                  }}
+                >
                   {doctor.about}
                 </p>
               </div>
@@ -269,6 +276,7 @@ export default function DoctorProfile() {
             flex-direction: column !important;
             text-align: center !important;
           }
+          
         }
 
         @media (max-width: 480px) {
@@ -280,25 +288,28 @@ export default function DoctorProfile() {
             font-size: 0.9rem !important;
           }
         }
-        .detail-row {
+       .detail-row {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 12px;
-  padding: 12px 0;
+  padding: 14px 0;
   border-bottom: 1px solid #f1f5f9;
 }
 
 .detail-label {
   color: #64748b;
   font-size: 0.9rem;
+  flex: 1;
 }
 
 .detail-value {
+  flex: 1;
   font-weight: 500;
   text-align: right;
-  word-break: break-word;
+  word-wrap: break-word;
   overflow-wrap: break-word;
-  max-width: 60%;
+  white-space: normal;
 }
 
 @media (max-width: 768px) {
@@ -307,10 +318,38 @@ export default function DoctorProfile() {
     align-items: flex-start;
   }
 
+  .detail-label {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+
   .detail-value {
-    max-width: 100%;
-    text-align: left;
     width: 100%;
+    text-align: left;
+    font-size: 1rem;
+  }
+}
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+}
+
+.slot-btn {
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .slot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .slot-btn {
+    font-size: 0.85rem;
+    padding: 8px;
   }
 }
       `}</style>

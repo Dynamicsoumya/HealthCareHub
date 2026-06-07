@@ -651,3 +651,8 @@ select {
     display: block !important;
   }
 }
+.card {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
